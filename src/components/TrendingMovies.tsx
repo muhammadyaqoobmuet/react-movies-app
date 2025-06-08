@@ -2,18 +2,7 @@ import { useEffect, useState } from "react";
 import { getTrendingMovies } from "../appwrite";
 import { Models } from "appwrite";
 
-interface MovieData {
-  $collectionId: string;
-  $createdAt: string;
-  $databaseId: string;
-  $id: string;
-  $permissions?: string[]; // You can specify the type inside the array if you know its structure
-  $updatedAt: string;
-  count: number;
-  movie_id: number;
-  poster_url: string;
-  searchTerm: string;
-}
+
 
 function TrendingMovies() {
   const [error, setError] = useState<string>("");
@@ -31,7 +20,7 @@ function TrendingMovies() {
         setLoading(false);
       }
       // Assuming the response is an array of `MovieData`
-
+      console.log(error);
       console.log(movies);
     } catch (error: unknown) {
       // Handle errors
