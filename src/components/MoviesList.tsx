@@ -40,7 +40,7 @@ const MoviesList: React.FC<SearchTermProps> = ({ searchTerm }) => {
   // Debounce function for search term
   const debouncedSearch = debounce((term: string) => {
     setDebouncedSearchTerm(term);
-  }, 1000); // Delay of 900ms
+  }, 1000); // Delay of 1000ms
 
   // Effect to apply the debounced search term whenever the searchTerm prop changes
   useEffect(() => {
@@ -69,8 +69,8 @@ const MoviesList: React.FC<SearchTermProps> = ({ searchTerm }) => {
       }
       return data; // Return the fetched data to the query
     } catch (error) {
-      throw new Error("Something went wrong while fetching movies.");
       console.log(error);
+      throw new Error("Something went wrong while fetching movies.");
     }
   }
 
@@ -90,21 +90,46 @@ const MoviesList: React.FC<SearchTermProps> = ({ searchTerm }) => {
   // If there's an error, display the error message
   if (isError) {
     return (
-      <div>
-        Error: {error instanceof Error ? error.message : "An error occurred"}
+      <div className="flex justify-center items-center py-12">
+        <div className="text-red-500 text-center px-4">
+          <p className="text-lg sm:text-xl font-semibold mb-2">
+            Oops! Something went wrong
+          </p>
+          <p className="text-sm sm:text-base">
+            {error instanceof Error ? error.message : "An error occurred"}
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-transparent w-full pt-20">
-      <p className="text-white text-3xl font-bold px-4 py-2">ALL MOVIES</p>
-      <div className="grid grid-cols-4 justify-center mx-auto gap-10 p-2 max-w-[1400px]">
-        {data?.results?.map((movie: Movie) => {
-          return <MovieCard key={movie.id} movie={movie} />;
-        })}
+    <section className="w-full bg-transparent pt-12 sm:pt-16 lg:pt-20 pb-8">
+      <div className="px-4 sm:px-6 lg:px-8">
+        <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 lg:mb-10">
+          ALL MOVIES
+        </h2>
+
+        {/* Responsive Grid Layout */}
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 justify-items-center max-w-[2000px] mx-auto">
+          {data?.results?.map((movie: Movie) => {
+            return <MovieCard key={movie.id} movie={movie} />;
+          })}
+        </div>
+
+        {/* No Results Message */}
+        {data?.results?.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-white text-lg sm:text-xl">
+              No movies found{searchTerm ? ` for "${searchTerm}"` : ""}
+            </p>
+            <p className="text-gray-400 text-sm sm:text-base mt-2">
+              Try a different search term
+            </p>
+          </div>
+        )}
       </div>
-    </div>
+    </section>
   );
 };
 
