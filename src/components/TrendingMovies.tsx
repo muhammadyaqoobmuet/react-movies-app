@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { getTrendingMovies } from "../appwrite";
 import { Models } from "appwrite";
 
-
-
 function TrendingMovies() {
   const [error, setError] = useState<string>("");
   const [trendingMovies, setTrendingMovies] = useState<Models.Document[]>([]); // Specify the array type here
