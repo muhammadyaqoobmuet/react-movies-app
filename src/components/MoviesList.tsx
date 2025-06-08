@@ -68,8 +68,9 @@ const MoviesList: React.FC<SearchTermProps> = ({ searchTerm }) => {
         await updateSearch(searchTerm, data.results[0]);
       }
       return data; // Return the fetched data to the query
-    } catch (err) {
+    } catch (error) {
       throw new Error("Something went wrong while fetching movies.");
+      console.log(error);
     }
   }
 

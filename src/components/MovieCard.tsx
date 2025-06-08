@@ -1,10 +1,9 @@
-import { updateSearch } from "../appwrite";
+
 import { Movie } from "./MoviesList";
 
 function MovieCard({
   movie: {
     title,
-    overview,
     poster_path,
     vote_average,
     original_language,
