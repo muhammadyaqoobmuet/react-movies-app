@@ -2,7 +2,7 @@ import { Client, Databases, ID, Query } from "appwrite";
 import { configFile } from "./config/config";
 import { Movie } from "./components/MoviesList";
 
-const client = new Client()
+const client: Client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
   .setProject(configFile.projectId);
 
